@@ -14,7 +14,6 @@ object ProjectDependencies {
     private const val composePreview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
     private const val composeActivity =
         "androidx.activity:activity-compose:${Versions.activityCompose}"
-    private const val composeTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
 
 
     //Tests
@@ -52,10 +51,6 @@ object ProjectDependencies {
         debugImplementation(composeUiTestManifest)
     }
 
-    fun androidBase(handler: DependencyHandler) = handler.apply {
-        implementation(androidxCore)
-    }
-
     fun hilt(handler: DependencyHandler) = handler.apply {
         kapt(hiltCompiler)
         implementation(hilt)
@@ -70,7 +65,6 @@ object ProjectDependencies {
         implementation(composeMaterial)
         implementation(composePreview)
         implementation(composeActivity)
-        debugImplementation(composeTooling)
     }
 
     fun coroutines(handler: DependencyHandler) = handler.apply {
