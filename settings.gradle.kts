@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Chess Timer"
-include ':app'
+include(":app")
