@@ -8,9 +8,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import by.ocheretny.chesstimer.ui.theme.ChessTimerTheme
-import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 
-@EntryPoint
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
