@@ -1,4 +1,4 @@
-package by.ocheretny.chesstimer.screens
+package by.ocheretny.chesstimer.screens.timerScreen
 
 import by.ocheretny.chesstimer.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 abstract class BaseViewModel<VS : ViewState, VE : ViewEvent, VA : ViewAction> : ViewModel() {
 
     protected abstract val initialViewState: VS
-    protected abstract fun processAction(action: VA)
 
     protected var lastViesState: VS = initialViewState
 
@@ -23,6 +22,7 @@ abstract class BaseViewModel<VS : ViewState, VE : ViewEvent, VA : ViewAction> : 
     val viewEvents = _viewEvents.receiveAsFlow()
 
     private val _viewActions = Channel<VA>(Channel.BUFFERED)
+    protected abstract fun processAction(action: VA)
 
     init {
         viewModelScope.launch {
