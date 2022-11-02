@@ -38,7 +38,6 @@ abstract class BaseViewModel<VS : ViewState, VE : ViewEvent, VA : ViewAction> : 
     }
 
     protected fun sendEvent(event: VE) = viewModelScope.launch {
-        _viewEvents.send(null)
         _viewEvents.send(event)
     }
 

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Chess Timer</string>
+    <string name="set_the_time">Set the time</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="column">:</string>
+    <string name="time_limit">Set a player time limit</string>
 </resources>
