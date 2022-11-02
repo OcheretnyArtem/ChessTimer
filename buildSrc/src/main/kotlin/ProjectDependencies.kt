@@ -14,7 +14,7 @@ object ProjectDependencies {
     private const val composePreview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
     private const val composeActivity =
         "androidx.activity:activity-compose:${Versions.activityCompose}"
-
+    private const val composeNumberPicker = "com.chargemap.compose:numberpicker:${Versions.composeNumberPicker}"
 
     //Tests
     private const val junit = "junit:junit:${Versions.junit}"
@@ -65,6 +65,7 @@ object ProjectDependencies {
         implementation(composeMaterial)
         implementation(composePreview)
         implementation(composeActivity)
+        implementation(composeNumberPicker)
     }
 
     fun coroutines(handler: DependencyHandler) = handler.apply {

@@ -9,7 +9,5 @@ internal object Versions {
     const val coroutines = "1.6.4"
     const val hilt = "2.44"
     const val hiltNavigationCompose = "1.0.0"
-
-
-
+    const val composeNumberPicker = "1.0.3"
 }
