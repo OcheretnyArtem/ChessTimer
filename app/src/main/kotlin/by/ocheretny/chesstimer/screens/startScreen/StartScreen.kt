@@ -19,14 +19,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import by.ocheretny.chesstimer.R
+import by.ocheretny.chesstimer.screens.destinations.TimerScreenDestination
 import by.ocheretny.chesstimer.ui.composables.RegularButton
 import by.ocheretny.chesstimer.ui.theme.Cornflower
 import by.ocheretny.chesstimer.ui.theme.PrimaryTextColor
@@ -34,9 +33,16 @@ import by.ocheretny.chesstimer.ui.theme.Yellow
 import com.chargemap.compose.numberpicker.FullHours
 import com.chargemap.compose.numberpicker.Hours
 import com.chargemap.compose.numberpicker.HoursNumberPicker
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
-fun StartScreen(viewModel: StartScreenViewModel = hiltViewModel()) {
+@RootNavGraph(start = true)
+@Destination
+fun StartScreen(
+    viewModel: StartScreenViewModel = hiltViewModel(),
+    navigator: DestinationsNavigator) {
     val viewState = viewModel.viewState.collectAsState(initial = null).value
 
     if (viewState?.isDialogVisible == true) {
@@ -45,7 +51,7 @@ fun StartScreen(viewModel: StartScreenViewModel = hiltViewModel()) {
                 viewModel.applyAction(StartScreenViewAction.DialogVisibilityChanged(false))
             },
             onOkRequest = {
-
+                navigator.navigate(TimerScreenDestination())
             }
         )
     }

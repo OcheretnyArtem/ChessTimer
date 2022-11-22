@@ -22,10 +22,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import by.ocheretny.chesstimer.models.Player
+import com.ramcosta.composedestinations.annotation.Destination
 
 private const val TEXT_ROTATION_DEGREES = 180f
 
 @Composable
+@Destination
 fun TimerScreen(viewModel: TimerScreenViewModel = hiltViewModel()) {
 
     val viewState = viewModel.viewState.collectAsState().value
