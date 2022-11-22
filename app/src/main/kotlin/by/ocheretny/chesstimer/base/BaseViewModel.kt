@@ -22,7 +22,7 @@ abstract class BaseViewModel<VS : ViewState, VE : ViewEvent, VA : ViewAction> : 
     val viewEvents = _viewEvents.receiveAsFlow()
 
     private val _viewActions = Channel<VA>(Channel.BUFFERED)
-    protected abstract fun processAction(action: VA)
+    protected abstract fun processAction(action: VA) : Unit
 
     init {
         viewModelScope.launch {

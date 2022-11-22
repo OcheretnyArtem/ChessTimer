@@ -10,4 +10,5 @@ internal object Versions {
     const val hilt = "2.44"
     const val hiltNavigationCompose = "1.0.0"
     const val composeNumberPicker = "1.0.3"
+    const val composeDestinations = "1.6.27-beta"
 }

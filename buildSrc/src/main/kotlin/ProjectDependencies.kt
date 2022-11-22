@@ -35,6 +35,12 @@ object ProjectDependencies {
     private const val hiltNavigationCompose =
         "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}"
 
+    //Compose destinations
+    private const val composeDestinationsCore =
+        "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
+    private const val composeDestinationsKsp =
+        "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
+
     //Tooling
     private const val composeUiTolling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
     private const val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
@@ -77,4 +83,8 @@ object ProjectDependencies {
 
     fun lifecycle(handler: DependencyHandler) = handler.implementation(lifecycle)
 
+    fun composeDestinations(handler: DependencyHandler) = handler.apply {
+        implementation(composeDestinationsCore)
+        ksp(composeDestinationsKsp)
+    }
 }

@@ -19,36 +19,54 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import by.ocheretny.chesstimer.R
+import by.ocheretny.chesstimer.screens.destinations.TimerScreenDestination
 import by.ocheretny.chesstimer.ui.composables.RegularButton
 import by.ocheretny.chesstimer.ui.theme.Cornflower
 import by.ocheretny.chesstimer.ui.theme.PrimaryTextColor
 import by.ocheretny.chesstimer.ui.theme.Yellow
+import by.ocheretny.chesstimer.utils.toInt
 import com.chargemap.compose.numberpicker.FullHours
 import com.chargemap.compose.numberpicker.Hours
 import com.chargemap.compose.numberpicker.HoursNumberPicker
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
-fun StartScreen(viewModel: StartScreenViewModel = hiltViewModel()) {
+@RootNavGraph(start = true)
+@Destination
+fun StartScreen(
+    viewModel: StartScreenViewModel = hiltViewModel(),
+    navigator: DestinationsNavigator,
+) {
     val viewState = viewModel.viewState.collectAsState(initial = null).value
+
+    when(viewModel.viewEvents.collectAsState(initial = null).value){
+        is StartScreenViewEvent.NavigateToTimerScreen -> {
+            navigator.navigate(TimerScreenDestination)
+        }
+        is StartScreenViewEvent.MakeToast -> Unit
+        null -> Unit
+    }
 
     if (viewState?.isDialogVisible == true) {
         HoursPickerDialog(
             onDismissRequest = {
                 viewModel.applyAction(StartScreenViewAction.DialogVisibilityChanged(false))
             },
-            onOkRequest = {
-
+            onOkRequest = { time ->
+                viewModel.applyAction(StartScreenViewAction.OnDialogOkButtonClicked(time))
             }
         )
     }
+
+
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -70,7 +88,7 @@ fun StartScreen(viewModel: StartScreenViewModel = hiltViewModel()) {
 @Composable
 fun HoursPickerDialog(
     onDismissRequest: () -> Unit,
-    onOkRequest: () -> Unit,
+    onOkRequest: (Int) -> Unit,
 ) {
     var pickerValue by remember { mutableStateOf<Hours>(FullHours(0, 0)) }
 
@@ -109,7 +127,7 @@ fun HoursPickerDialog(
                                 .weight(1f)
                                 .padding(horizontal = 8.dp),
                             text = stringResource(id = R.string.ok)) {
-                            onOkRequest()
+                            onOkRequest(pickerValue.toInt())
                         }
                     }
                 }

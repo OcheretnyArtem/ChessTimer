@@ -3,19 +3,19 @@ package by.ocheretny.chesstimer.screens.startScreen
 import by.ocheretny.chesstimer.base.ViewAction
 import by.ocheretny.chesstimer.base.ViewEvent
 import by.ocheretny.chesstimer.base.ViewState
-import com.chargemap.compose.numberpicker.FullHours
-import com.chargemap.compose.numberpicker.Hours
 
 data class StartScreenViewState(
     val isDialogVisible: Boolean = false,
+    val selectedTimeInMin: Int = 0,
 ) : ViewState
 
-sealed class StartScreenViewEvent : ViewEvent{
-
+sealed class StartScreenViewEvent : ViewEvent {
+    object NavigateToTimerScreen : StartScreenViewEvent()
+    data class MakeToast(val messageId: Int) : StartScreenViewEvent()
 }
 
 sealed class StartScreenViewAction : ViewAction {
     data class DialogVisibilityChanged(val isDialogVisible: Boolean) : StartScreenViewAction()
-    object NavigateToTimerScreen : StartScreenViewAction()
+    data class OnDialogOkButtonClicked(val min: Int) : StartScreenViewAction()
 
 }

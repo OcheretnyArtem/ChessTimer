@@ -3,6 +3,18 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.devtools.ksp") version PublicVersions.ksp
+}
+
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
 }
 
 android {
@@ -56,5 +68,6 @@ dependencies {
     ProjectDependencies.coroutines(this)
     ProjectDependencies.hilt(this)
     ProjectDependencies.hiltNavigationCompose(this)
+    ProjectDependencies.composeDestinations(this)
     ProjectDependencies.composeTooling(this)
 }
