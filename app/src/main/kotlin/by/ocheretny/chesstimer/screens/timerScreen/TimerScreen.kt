@@ -18,10 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import by.ocheretny.chesstimer.models.Black
 import by.ocheretny.chesstimer.models.Player
+import by.ocheretny.chesstimer.models.White
 import com.ramcosta.composedestinations.annotation.Destination
 
 private const val TEXT_ROTATION_DEGREES = 180f
@@ -68,13 +71,13 @@ private fun BattleField(
         .background(Color.Transparent)) {
         PlayerField(
             modifier = Modifier.weight(1f),
-            player = Player.Black,
+            player = Black,
             timeLeft = state.blackPlayerTimeLeft,
             onClick = onBlackClick
         )
         PlayerField(
             modifier = Modifier.weight(1f),
-            player = Player.White,
+            player = White,
             timeLeft = state.whitePlayerTimeLeft,
             onClick = onWhiteClick)
     }
@@ -88,10 +91,10 @@ private fun PlayerField(
     onClick: () -> Unit = {},
 ) {
     val fieldSettings: FieldSettings = when (player) {
-        is Player.Black -> FieldSettings(Color.Black,
+        is Black -> FieldSettings(Color.Black,
             textColor = Color.White,
             rotation = TEXT_ROTATION_DEGREES)
-        is Player.White -> FieldSettings(Color.White, textColor = Color.Black, rotation = 0f)
+        is White -> FieldSettings(Color.White, textColor = Color.Black, rotation = 0f)
     }
     Box(modifier = modifier
         .fillMaxWidth()
@@ -106,7 +109,8 @@ private fun PlayerField(
 }
 
 @Composable
-fun GameStart(onStartButtonClick: () -> Unit) {
+@Preview
+fun GameStart(onStartButtonClick: () -> Unit = {}) {
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Color.White), contentAlignment = Alignment.Center) {
